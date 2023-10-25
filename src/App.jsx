@@ -1,6 +1,6 @@
 import styles from './app.module.scss'
 
-import  { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import ModalWindow from './components/modalWindow/index.jsx'
 import PlayArea from './components/playArea/index.jsx'
@@ -15,16 +15,11 @@ function App() {
   const [areaSize, setAreaSize] = useState(3)
   const [areaArray, setAreaArray] =useState(generateArea(areaSize))
 
-  function resetGameAndCloseHandler() {
+  const resetGameHandler = useCallback(() => {
     setAreaArray(generateArea(areaSize))
-    setIsOpenModalWindow(false)
-    setWinner(null)
-  }
-  function resetGameHandler() {
-    setAreaArray(generateArea(areaSize))
-  }
+  }, [areaSize])
 
-  function cellHandler(rowIndex, cellIndex) {
+  const cellHandler = useCallback((rowIndex, cellIndex) => {
     if(areaArray[rowIndex][cellIndex] !== '-') return
 
     areaArray[rowIndex][cellIndex] = nextPlayerStep
@@ -33,10 +28,15 @@ function App() {
       newState[rowIndex] = [...prev[rowIndex]]
       newState[rowIndex][cellIndex] = nextPlayerStep ? 'x' : '0'
       return newState
-    })
+    });
     setNextPlayerStep((prev) => !prev)
-  }
+  }, [areaArray, nextPlayerStep])
 
+  const resetGameAndCloseHandler = useCallback(() => {
+    setAreaArray(generateArea(areaSize))
+    setIsOpenModalWindow(false)
+    setWinner(null)
+  }, [areaSize])
 
   return (
     <div className={styles.app}>
