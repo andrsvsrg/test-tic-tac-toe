@@ -1,0 +1,11 @@
+.cellWrapper {
+  min-width: 55px;
+  min-height: 55px;
+  width: 200px;
+  flex-grow: 1;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}

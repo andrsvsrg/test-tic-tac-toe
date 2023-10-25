@@ -1,0 +1,21 @@
+.settingsWrapper {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .customInput {
+    margin: 0 15px;
+    width: 80px;
+    height: 30px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
